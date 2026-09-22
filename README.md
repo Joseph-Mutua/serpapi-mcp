@@ -196,11 +196,13 @@ docker build -t serpapi-mcp . && docker run -p 8000:8000 serpapi-mcp
 # Build the Claude Desktop extension (MCP Bundle); rebuilds engines, needs Node.js for the MCPB CLI
 uv run mcpb/build.py
 
-# Release: bump the version in pyproject.toml, server.json and mcpb/manifest.json, then tag it.
+# Release: update pyproject.toml, server.json, mcpb/manifest.json and uv.lock together.
+uv run --no-sync scripts/bump_version.py 2.0.0
+# Review and commit the changes before tagging the release.
 # Nothing ships on a plain push to main. The tag runs the release workflow, which runs the test
 # suite and then deploys the hosted server, publishes server.json to the MCP Registry, and builds
 # the MCP Bundle and attaches it to the GitHub release.
-git tag v1.0.2 && git push origin v1.0.2
+git tag v2.0.0 && git push origin v2.0.0
 
 # Regenerate engine resources (Playground scrape)
 python build-engines.py

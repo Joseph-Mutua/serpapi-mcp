@@ -34,10 +34,12 @@ serpapi-mcp-<version>.mcpb
 
 ## Releasing
 
-Bump the version in `pyproject.toml`, `server.json` and `mcpb/manifest.json` (CI checks that they match), then push a matching tag:
+From the repository root, run the version helper to update `pyproject.toml`, `server.json`, `mcpb/manifest.json` and `uv.lock` together. It accepts stable `X.Y.Z` versions. Review and commit the changes, then push a matching tag:
 
 ```bash
-git tag v1.0.2 && git push origin v1.0.2
+uv run --no-sync scripts/bump_version.py 2.0.0
+# Review and commit the changes before tagging.
+git tag v2.0.0 && git push origin v2.0.0
 ```
 
 The [release workflow](../.github/workflows/release.yml) runs the test suite, then builds the bundle, creates the GitHub release if it does not exist yet and attaches the `.mcpb` to it; the same workflow also deploys the hosted server and publishes `server.json` to the MCP Registry, so a tag is the only thing that ships or builds anything. Pull requests only run the manifest and stdio entry point tests in [`tests/test_mcpb.py`](../tests/test_mcpb.py); build locally with `uv run mcpb/build.py` to check a bundle before tagging.

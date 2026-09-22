@@ -33,6 +33,7 @@ server/venv/
 .github/
 copilot/
 tests/
+scripts/
 Dockerfile
 server.json
 build-engines.py
