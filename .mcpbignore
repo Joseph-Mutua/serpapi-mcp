@@ -33,8 +33,8 @@ server/venv/
 .github/
 copilot/
 tests/
+scripts/
 Dockerfile
-smithery.yaml
 server.json
 build-engines.py
 mcpb/
